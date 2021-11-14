@@ -10,6 +10,7 @@ export async function seed(knex: Knex): Promise<any> {
         {
           description: "Build a todo api with auth",
           completed: false,
+          userId: 1,
         },
       ])
     })
