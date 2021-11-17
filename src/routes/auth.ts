@@ -26,7 +26,11 @@ authRouter.post("/register", (req, res) => {
   users
     .add(user)
     .then((user: User) => {
-      res.status(201).json(user)
+      const token = genToken(user)
+      res.status(201).json({
+        message: `Welcome ${user.username}! 🔥`,
+        token,
+      })
     })
     .catch((error: any) => {
       res.status(500).json(error)

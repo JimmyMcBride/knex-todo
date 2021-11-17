@@ -37,7 +37,7 @@ todoRouter.get("/:id", authenticate, async (req: Request, res: Response) => {
       userId: req.decodedJwt?.id,
     })
     if (todo.length > 0) {
-      res.json(todo)
+      res.json(todo[0])
     } else {
       res.status(404).json({
         message:
