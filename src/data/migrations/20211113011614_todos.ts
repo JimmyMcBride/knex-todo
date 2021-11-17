@@ -6,7 +6,7 @@ export async function up(knex: Knex): Promise<Knex.SchemaBuilder> {
     tbl.increments()
     tbl.text("title").notNullable()
     tbl.text("description")
-    tbl.boolean("completed").notNullable()
+    tbl.boolean("completed").defaultTo(false).notNullable()
     tbl.integer("userId").notNullable()
     tbl.text("date").defaultTo(moment().unix()).notNullable()
     tbl.text("updatedAt").defaultTo(moment().unix()).notNullable()
