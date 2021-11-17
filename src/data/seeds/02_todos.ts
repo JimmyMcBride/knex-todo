@@ -8,7 +8,13 @@ export async function seed(knex: Knex): Promise<any> {
       // Inserts seed entries 🌱
       return knex("todos").insert([
         {
+          title: "Build Todo API",
           description: "Build a todo api with auth",
+          completed: true,
+          userId: 1,
+        },
+        {
+          title: "Update Todo table to include a tile",
           completed: false,
           userId: 1,
         },

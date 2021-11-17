@@ -9,7 +9,6 @@ export async function seed(knex: Knex): Promise<any> {
       // Inserts seed entries 🌱
       return knex("users").insert([
         {
-          id: 1,
           username: "TestUser",
           email: "testUser@gmail.com",
           password: await bcrypt.hash("password", 12),

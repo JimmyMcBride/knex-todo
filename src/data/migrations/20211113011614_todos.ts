@@ -4,7 +4,8 @@ import moment from "moment"
 export async function up(knex: Knex): Promise<Knex.SchemaBuilder> {
   return knex.schema.createTable("todos", (tbl) => {
     tbl.increments()
-    tbl.text("description").notNullable()
+    tbl.text("title").notNullable()
+    tbl.text("description")
     tbl.boolean("completed").notNullable()
     tbl.integer("userId").notNullable()
     tbl.text("date").defaultTo(moment().unix()).notNullable()

@@ -6,7 +6,7 @@ This todo api, lets you:
 - Login as that user
 - Create, read, update, and delete todos as that user.
 
-Each todo contains a description, a completed status, a datetime it was created, and a datetime is was last updated. You can only view, edit, create, and delete todos that belong to your currently logged in user.
+Each todo contains a title, description, completed status, a datetime it was created, and a datetime is was last updated. You can only view, edit, create, and delete todos that belong to your currently logged in user.
 
 > Base URL: `https://knex-todo.herokuapp.com`
 
@@ -77,7 +77,7 @@ Example body:
 
 ```json
 {
-  "description": "Get heroku postgres ssl setup",
+  "title": "Get heroku postgres ssl setup",
   "completed": false
 }
 ```
@@ -87,7 +87,8 @@ Example response:
 ```json
 {
   "id": 2,
-  "description": "Get heroku postgres ssl setup",
+  "title": "Get heroku postgres ssl setup",
+  "description": null,
   "completed": false,
   "userId": 2,
   "date": "1637165861",
@@ -114,7 +115,8 @@ Example response:
 ```json
 {
   "id": 2,
-  "description": "Get heroku postgres ssl setup",
+  "title": "Get heroku postgres ssl setup",
+  "description": null,
   "completed": false,
   "userId": 2,
   "date": "1637165861",
@@ -134,7 +136,8 @@ Example response:
 [
   {
     "id": 2,
-    "description": "Get heroku postgres ssl setup",
+    "title": "Get heroku postgres ssl setup",
+    "description": null,
     "completed": false,
     "userId": 2,
     "date": "1637165861",
@@ -154,7 +157,8 @@ Example response:
 ```json
 {
   "id": 2,
-  "description": "Get heroku postgres ssl setup",
+  "title": "Get heroku postgres ssl setup",
+  "description": null,
   "completed": false,
   "userId": 2,
   "date": "1637165861",
