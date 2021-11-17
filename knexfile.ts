@@ -38,7 +38,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: `${process.env.DATABASE_URL}?sslmode=require`,
+    connection: `${process.env.DATABASE_URL}?PGSSLMODE=no-verify`,
     pool: {
       min: 2,
       max: 10,
