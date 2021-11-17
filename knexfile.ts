@@ -1,3 +1,7 @@
+const parse = require("pg-connection-string").parse
+const pgconfig = parse(`${process.env.DATABASE_URL}?ssl=true`)
+pgconfig.ssl = { rejectUnauthorized: false }
+
 require("dotenv").config()
 
 module.exports = {
@@ -38,7 +42,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: `${process.env.DATABASE_URL}?sslmode=require&PGSSLMODE=no-verify`,
+    connection: pgconfig,
     pool: {
       min: 2,
       max: 10,
