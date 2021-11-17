@@ -77,8 +77,7 @@ Example body:
 
 ```json
 {
-  "title": "Get heroku postgres ssl setup",
-  "completed": false
+  "title": "Get heroku postgres ssl setup"
 }
 ```
 
