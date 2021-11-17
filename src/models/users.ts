@@ -14,9 +14,8 @@ export default {
   async findBy(filter: Filter): Promise<User> {
     return await db("users").where(filter).first()
   },
-  async add(user: User) {
-    const [id] = await db("users").insert(user)
-
-    return this.findBy(id)
+  async add(user: User): Promise<User> {
+    const newUser = await db("users").insert(user).returning("*")
+    return newUser[0]
   },
 }
