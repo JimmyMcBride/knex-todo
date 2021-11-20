@@ -30,7 +30,12 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
   if (token) {
     jwt.verify(token, String(process.env.SECRET), (err, decodedToken) => {
       if (err) {
-        res.status(401).json({ message: "wut da heck? 💩" })
+        res
+          .status(401)
+          .json({
+            message:
+              "You must be authenticated to make this request. 🛑 Are you passing a valid token in your headers?",
+          })
       } else {
         // @ts-ignore
         req.decodedJwt = decodedToken
