@@ -4,7 +4,7 @@ import users from "../models/users"
 import cors from "cors"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
-import { validate } from "../middleware"
+import { authenticate, validate } from "../middleware"
 import { User } from "../types"
 
 // Enable .env 💬
@@ -50,6 +50,29 @@ authRouter.post("/login", validate, (req, res) => {
           message: `Welcome ${user.username}! 🔥`,
           token,
         })
+      } else {
+        res.status(401).json({
+          message: "Invalid Credentials 💩",
+        })
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Server error ☠️",
+        error,
+      })
+    })
+})
+
+authRouter.get("/me", authenticate, (req, res) => {
+  // @ts-ignore
+  const id = req.decodedJwt?.id
+
+  users
+    .findBy({ id })
+    .then((user: User) => {
+      if (user) {
+        res.status(200).json(user)
       } else {
         res.status(401).json({
           message: "Invalid Credentials 💩",
