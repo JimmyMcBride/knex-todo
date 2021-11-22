@@ -51,7 +51,7 @@ todoRouter.get("/:id", authenticate, async (req: Request, res: Response) => {
   }
 })
 
-todoRouter.post("/", async (req: Request, res: Response) => {
+todoRouter.post("/", authenticate, async (req: Request, res: Response) => {
   // @ts-ignore
   const id = req.decodedJwt?.id
   let newTodo = req.body
@@ -73,7 +73,7 @@ todoRouter.post("/", async (req: Request, res: Response) => {
   }
 })
 
-todoRouter.put("/:id", async (req: Request, res: Response) => {
+todoRouter.put("/:id", authenticate, async (req: Request, res: Response) => {
   const { id } = req.params
   const changes = req.body
   try {
@@ -91,7 +91,7 @@ todoRouter.put("/:id", async (req: Request, res: Response) => {
   }
 })
 
-todoRouter.delete("/:id", async (req: Request, res: Response) => {
+todoRouter.delete("/:id", authenticate, async (req: Request, res: Response) => {
   const { id } = req.params
   try {
     const deleted = await todos.delete(Number(id))
