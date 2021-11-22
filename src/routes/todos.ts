@@ -92,15 +92,25 @@ todoRouter.put("/:id", authenticate, async (req: Request, res: Response) => {
 })
 
 todoRouter.delete("/:id", authenticate, async (req: Request, res: Response) => {
+  // @ts-ignore
+  const user_id = req.decodedJwt?.id
   const { id } = req.params
   try {
-    const deleted = await todos.delete(Number(id))
-    if (deleted) {
-      res.json({ message: "Message has been successfully deleted 💣" })
-    } else {
-      res.status(404).json({
-        message: "Could not find the todo with given id 🤷‍",
+    const todo = await todos.findById(Number(id))
+    if (todo.id != user_id) {
+      res.status(401).json({
+        message:
+          "Stop right there! You're not allowed to delete other users todos!!! 🛑",
       })
+    } else {
+      const deleted = await todos.delete(Number(id))
+      if (deleted) {
+        res.json({ message: "Message has been successfully deleted 💣" })
+      } else {
+        res.status(404).json({
+          message: "Could not find the todo with given id 🤷‍",
+        })
+      }
     }
   } catch (err) {
     res.status(500).json({ message: "Failed to delete todo ☠️" })
