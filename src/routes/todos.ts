@@ -78,11 +78,19 @@ todoRouter.post("/", authenticate, async (req: Request, res: Response) => {
 todoRouter.put("/:id", authenticate, async (req: Request, res: Response) => {
   const { id } = req.params
   const changes = req.body
+  // @ts-ignore
+  const user_id = req.decodedJwt?.id
   try {
     const todo = await todos.findById(Number(id))
     if (todo) {
-      const updatedTodo = await todos.update(changes, Number(id))
-      res.json(updatedTodo)
+      if (todo.userId == user_id) {
+        const updatedTodo = await todos.update(changes, Number(id))
+        res.json(updatedTodo)
+      } else {
+        res.status(401).json({
+          message: "Stop it Logan!!!",
+        })
+      }
     } else {
       res.status(404).json({
         message: "Could not find todo with given id 🤷‍",
