@@ -97,7 +97,8 @@ todoRouter.delete("/:id", authenticate, async (req: Request, res: Response) => {
   const { id } = req.params
   try {
     const todo = await todos.findById(Number(id))
-    if (todo.id != user_id) {
+    console.log(`User`)
+    if (todo.userId != user_id) {
       res.status(401).json({
         message:
           "Stop right there! You're not allowed to delete other users todos!!! 🛑",
