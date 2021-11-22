@@ -56,7 +56,9 @@ todoRouter.post("/", authenticate, async (req: Request, res: Response) => {
   const id = req.decodedJwt?.id
   let newTodo = req.body
   newTodo = {
-    ...newTodo,
+    title: newTodo.title,
+    description: newTodo.description,
+    completed: newTodo.completed ? true : false,
     userId: id,
   }
   try {
